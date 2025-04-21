@@ -9,7 +9,7 @@ function Home(){
     const [pass,setpass]=useState("");
     const [searchParam,setParam]=useSearchParams();
     const pasteId=searchParam.get("pasteId");
-    // const [cond,setcod]=useState(false);
+    
     console.log("hello param",searchParam);
     const dispatch=useDispatch();
     const allPastes=useSelector((state)=>state.paste.pastes);
@@ -26,6 +26,10 @@ function Home(){
       
     },[pasteId]);
     function creatPaste(){
+        if(title.trim()===""||value.trim()===""){
+            alert("Please fill in both Title and Content");
+            return;
+        }
         const paste={
             title:title,
             content:value,
@@ -33,9 +37,11 @@ function Home(){
             createdAt:new Date().toISOString(),
             ptr:pass
         }
+        alert("Successfully Notes Created");
         if(pasteId){
-            console.log("Hello update",paste);
+            
             dispatch(updatePastes(paste));
+        
         }
         else{
             dispatch(addToPaste(paste));
@@ -47,13 +53,13 @@ function Home(){
  
     return(
         <div className='  bg-orange-500'><div className=''>
-            <input 
+            <input required
             className='hover:border-purple-500 mt-9
          rounded-md ml-3 border-blue-800 border-[3px]  m-2 h-9 w-[40%]' type="text" placeholder='Enter title here' value={title} onChange={(e)=>setTitle(e.target.value)}/>
             <button className='p-2 border-blue-800 border-2 h-9 pt-1  ' onClick={creatPaste}>{pasteId?"Update Notes":"Creat Notes"}</button>
         </div>
         <div className='mx-auto h-screen max-w-[90%] min-w-[98%] '>
-            <textarea className='w-3/4  border-[3px] mt-1 ml-[9%]  rounded-md border-blue-700 h-[75%]'value={value} placeholder='Enter Content'
+            <textarea required className='w-3/4  border-[3px] mt-1 ml-[1%]  rounded-md border-blue-700 h-[75%]'value={value} placeholder='Enter Content'
             onChange={(e)=>{setValue(e.target.value)}}/>
         </div>
         </div>
