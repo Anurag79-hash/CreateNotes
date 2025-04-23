@@ -42,11 +42,12 @@ function handleDelete(pasteId){
                                 
                                 if(!paste){console.error("paste not defined"); return;}
                                 const urlS=`${window.location.origin}/pastes/${paste._id}`
-                                navigator.share({
+                                if(navigator.share){navigator.share({
                                     title:paste.title,
                                     context:paste.content,
                                     url:urlS,
-                                }).then(()=>console.log("hello i share")).catch(err=>console.log("Page not found",err));
+                                }).then(()=>console.log("hello i share")).catch(err=>console.log("Page not found",err));}
+                                else {alert("Web page not supported on this browser");}
                             }}>Share</button>
                         </div>
                         </div>
