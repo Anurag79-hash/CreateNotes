@@ -39,12 +39,14 @@ function handleDelete(pasteId){
                             <button className='m-1' onClick={()=>{handleDelete(paste?._id)}}>
                             Delete</button> 
                             <button onClick={()=>{
+                                
+                                if(!paste){console.error("paste not defined"); return;}
                                 const urlS=`${window.location.origin}/pastes/${paste._id}`
                                 navigator.share({
                                     title:paste.title,
                                     context:paste.content,
                                     url:urlS,
-                                }).then(()=>console.log("hello i share"))
+                                }).then(()=>console.log("hello i share")).catch(err=>console.log("Page not found",err));
                             }}>Share</button>
                         </div>
                         </div>

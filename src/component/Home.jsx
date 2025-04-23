@@ -37,7 +37,7 @@ function Home(){
             createdAt:new Date().toISOString(),
             ptr:pass
         }
-        alert("Successfully Notes Created");
+        // alert("Successfully Notes Created");
         if(pasteId){
             
             dispatch(updatePastes(paste));

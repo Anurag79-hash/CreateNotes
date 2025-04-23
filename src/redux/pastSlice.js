@@ -12,6 +12,8 @@ export const pasteSlice=createSlice({
         state.pastes.push(paste);
         // const passInuser=prompt("Enter New pass");
         // paste.ptr=passInuser;
+        alert("Successfully Notes Created");
+        
         console.log("hello",paste.ptr);
         localStorage.setItem("pastes",JSON.stringify(state.pastes));
         
